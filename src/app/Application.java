@@ -8,7 +8,7 @@ public class Application
 
 	public static void main(String[] args) 
 	{
-		var s = new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		
 		System.out.println("Digite o tamanho do array : ");
 		int tamanho = s.nextInt();
@@ -19,7 +19,7 @@ public class Application
 		// perguntar o tamanho do array
 		// perguntar o id do array
 		
-
+		Pool_mk1 pool = new Pool_mk1(id, tamanho , null, null);
 	}
 
 }
