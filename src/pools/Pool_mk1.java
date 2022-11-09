@@ -37,7 +37,7 @@ public class Pool_mk1
 			pool_inserir_pessoa(pessoas[i]);
 		}
 	}
-
+	//
 	public void pool_movimentar_pessoas(int tempo_milisegundos) 
 	{if(!flag_PrimeiraVez_movimentar_p) {return;}
 	 if(pool_posicoes_ocupadas.size()==0)	{throw new java.lang.Error("Metodo: pool_movimentar_pessoas =>\nNao ha pessoas para movimentar");}
