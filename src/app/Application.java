@@ -28,7 +28,9 @@ public class Application
 		*/
 		
 		Pool_mk2 test = new Pool_mk2(10,2,new Front(), new Pessoa_Thread[] {new Pessoa_Thread(11), new Pessoa_Thread(12)});
-		System.out.println(test.pool);
+		System.out.println(test.pool_IdPessoa_para_int());
+	
+		
 		
 		for(int i=0; i!=test.pool_posicoes_ocupadas.size(); i++) {
 			System.out.println(test.pool[i].getId_pessoa());

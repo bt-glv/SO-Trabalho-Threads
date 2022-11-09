@@ -91,6 +91,19 @@ public class Pool_mk2
 		}
 	}
 	
+	public int[] pool_IdPessoa_para_int() {
+		int[] output = new int[pool.length];
+		for(int i=0; i!=pool.length;i++) {
+			
+			if(pool[i]==null) {
+				output[i]=0;
+			}else {
+				output[i]=pool[i].getId_pessoa();
+			}
+			
+		}
+		return output;
+	}
 	
 	public void pool_movimentar_pessoas(int tempo_milisegundos) 
 	{if(!flag_PrimeiraVez_movimentar_p) {return;}
