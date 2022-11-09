@@ -37,8 +37,13 @@ public class Pool_mk2
 		{
 			pool_adicionar_pessoa(pessoas[i]);
 		}
+	
+		for(int i=0; i<quantidade_portas;i++)
+		{
+			portas.add(new Porta());
+		}
 		
-		logger.receber("A pool foi instancializad", null);
+		logger.receber("A pool foi instancializada", null);
 	}
 	private void pool_adicionar_pessoa(Pessoa_Thread p) 
 	{
