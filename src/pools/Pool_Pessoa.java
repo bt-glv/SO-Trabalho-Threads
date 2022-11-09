@@ -6,18 +6,18 @@ import interfaces.*;
 
 public class Pool_Pessoa 
 {
+	public final int id;
 	private Pessoa[] pool;
-	private int pool_tamanho;
 	
 	private ArrayList<Integer> posicoes_ocupadas = new ArrayList<Integer> ();
 	
 	
 	
 	
-	public Pool_Pessoa(int tamanho_pool, Pessoa[] pessoas)
+	public Pool_Pessoa(int tamanho_pool, Pessoa[] pessoas, int id_da_pool)
 	{
+		this.id=id_da_pool;
 		pool = new Pessoa[tamanho_pool];
-		pool_tamanho=tamanho_pool;
 		
 		for(int i=0; i!=pessoas.length; i++) {
 			pool_inserir_pessoa(pessoas[i]);
@@ -35,13 +35,16 @@ public class Pool_Pessoa
 		
 		while((System.currentTimeMillis()-startTime)<tempo_milisegundos) 
 		{
-			indice_alvo=r.nextInt(pool_tamanho);
 			indice_inicial=posicoes_ocupadas.get(r.nextInt(posicoes_ocupadas.size()));
+			indice_alvo=r.nextInt(pool.length);
 			
 			if(pool[indice_alvo]==null) 
 			{
 				pool[indice_alvo]=pool[indice_inicial];
+				posicoes_ocupadas.remove(indice_inicial);
+				
 				pool[indice_inicial]=null;
+				posicoes_ocupadas.add(indice_alvo);
 			}
 			else
 			{
@@ -57,9 +60,12 @@ public class Pool_Pessoa
 
 
 
-
+	// So pode ser usado antes da funcao "pool_movimentar_pessoas" 
 	private void pool_inserir_pessoa(Pessoa p)
 	{
+		
+		if(posicoes_ocupadas.size()==pool.length) {throw new java.lang.Error("Tentativa de inserir Itens em uma pool cheia.\nId da pool: "+this.id);}
+		
 		pool[posicoes_ocupadas.size()]=p;
 		posicoes_ocupadas.add(posicoes_ocupadas.size());
 		
@@ -80,17 +86,6 @@ public class Pool_Pessoa
 
 
 
-	private int[] pool_listar_posicoes_ocupadas() 
-	{
-		int[] output = new int[posicoes_ocupadas.size()];
-		
-		for(int i=0; i!=posicoes_ocupadas.size();i++)
-		{
-			output[i]=posicoes_ocupadas.get(i);
-		}
-		
-		return output;
-	}
 
 	public synchronized Pessoa resgatar_pessoa(Algoritmo_De_Decisao a) 
 	{
@@ -117,6 +112,21 @@ public class Pool_Pessoa
 		
 		return null;
 	}
+		
+		
+	private int[] pool_listar_posicoes_ocupadas() 
+	{
+		int[] output = new int[posicoes_ocupadas.size()];
+		
+		for(int i=0; i!=posicoes_ocupadas.size();i++)
+		{
+			output[i]=posicoes_ocupadas.get(i);
+		}
+		
+		return output;
+	}
+		
+		
 */
 	
 }// END MAIN CLASS STATEMENT
