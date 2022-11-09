@@ -3,29 +3,47 @@ import java.util.Random;
 
 import models.*;
 import interfaces.*;
-
+/*
+ * 
+ * Notas
+ * 
+ * 
+ * Nessa aproximacao, caso seja feito um mecanismo de sinal
+ * nos objetos 'pessoas'
+ */
 public class Pool_Pessoa 
 {
 	public final int id;
+	private final Log logger;
 	private Pessoa[] pool;
+	private ArrayList<Integer> pool_posicoes_ocupadas = new ArrayList<Integer> ();
 	
-	private ArrayList<Integer> posicoes_ocupadas = new ArrayList<Integer> ();
+	private Boolean flag_PrimeiraVez_movimentar_p=true;
+	public Boolean pool_esta_vazia() {
+		if(pool_posicoes_ocupadas.size()==0) {return true;}
+		return false;
+	}
 	
 	
-	
-	
-	public Pool_Pessoa(int tamanho_pool, Pessoa[] pessoas, int id_da_pool)
+	public Pool_Pessoa(int id_da_pool, int tamanho_pool, Pessoa[] pessoas, Log logger)
 	{
 		this.id=id_da_pool;
+		this.logger=logger;
+		
 		pool = new Pessoa[tamanho_pool];
 		
-		for(int i=0; i!=pessoas.length; i++) {
+		for(int i=0; i!=pessoas.length; i++) 
+		{
 			pool_inserir_pessoa(pessoas[i]);
 		}
 	}
 
 	public void pool_movimentar_pessoas(int tempo_milisegundos) 
-	{
+	{if(!flag_PrimeiraVez_movimentar_p) {return;}
+	 if(pool_posicoes_ocupadas.size()==0)	{throw new java.lang.Error("Metodo: pool_movimentar_pessoas =>\nNao ha pessoas para movimentar");}
+
+
+
 		long startTime = System.currentTimeMillis();
 		Random r = new Random();
 		
@@ -35,16 +53,16 @@ public class Pool_Pessoa
 		
 		while((System.currentTimeMillis()-startTime)<tempo_milisegundos) 
 		{
-			indice_inicial=posicoes_ocupadas.get(r.nextInt(posicoes_ocupadas.size()));
+			indice_inicial=pool_posicoes_ocupadas.get(r.nextInt(pool_posicoes_ocupadas.size()));
 			indice_alvo=r.nextInt(pool.length);
 			
 			if(pool[indice_alvo]==null) 
 			{
 				pool[indice_alvo]=pool[indice_inicial];
-				posicoes_ocupadas.remove(indice_inicial);
+				pool_posicoes_ocupadas.remove(indice_inicial);
 				
 				pool[indice_inicial]=null;
-				posicoes_ocupadas.add(indice_alvo);
+				pool_posicoes_ocupadas.add(indice_alvo);
 			}
 			else
 			{
@@ -55,6 +73,8 @@ public class Pool_Pessoa
 			}
 			
 		}
+		
+		flag_PrimeiraVez_movimentar_p=false;
 	}
 
 
@@ -62,12 +82,12 @@ public class Pool_Pessoa
 
 	// So pode ser usado antes da funcao "pool_movimentar_pessoas" 
 	private void pool_inserir_pessoa(Pessoa p)
-	{
+	{if(!flag_PrimeiraVez_movimentar_p) {return;}
 		
-		if(posicoes_ocupadas.size()==pool.length) {throw new java.lang.Error("Tentativa de inserir Itens em uma pool cheia.\nId da pool: "+this.id);}
+		if(pool_posicoes_ocupadas.size()==pool.length) {throw new java.lang.Error("Tentativa de inserir Itens em uma pool cheia.\nId da pool: "+this.id);}
 		
-		pool[posicoes_ocupadas.size()]=p;
-		posicoes_ocupadas.add(posicoes_ocupadas.size());
+		pool[pool_posicoes_ocupadas.size()]=p;
+		pool_posicoes_ocupadas.add(pool_posicoes_ocupadas.size());
 		
 	}
 
@@ -77,7 +97,7 @@ public class Pool_Pessoa
 		
 		Pessoa output = pool[pool_indice];
 		pool[pool_indice]=null;
-		posicoes_ocupadas.remove(Integer.valueOf(pool_indice));
+		pool_posicoes_ocupadas.remove(Integer.valueOf(pool_indice));
 		
 		return output;
 	}
@@ -86,11 +106,20 @@ public class Pool_Pessoa
 
 
 
-
-	public synchronized Pessoa resgatar_pessoa(Algoritmo_De_Decisao a) 
+//
+// A funcao que os metodos irao usar para interagir com as pools
+//
+	public synchronized Pessoa resgatar_pessoa(Algoritmo_De_Decisao a, int id_thread) 
 	{
-		int pessoa_selecionada = a.run(posicoes_ocupadas, pool);
-		return pool_remover_pessoa(pessoa_selecionada);
+		Pessoa output;
+		logger.receber("Thread de id:"+id_thread+" entrou pela porta de id: "+id_thread);
+
+		int pessoa_selecionada = a.run(pool_posicoes_ocupadas, pool);
+		output =pool_remover_pessoa(pessoa_selecionada);
+		logger.receber("Thread de id:"+id_thread+" selecionou a pessoa de id: "+output.id);
+
+		logger.receber("Thread de id:"+id_thread+" resgatou a pessoa de id: "+output.id);
+		return output;
 	}
 /*	
 	public synchronized Tuple<int[], Pessoa> thread_action(int action, int pool_indice)
@@ -99,7 +128,7 @@ public class Pool_Pessoa
 		
 		if(action==1) 
 		{
-			int[] temp = pool_listar_posicoes_ocupadas();
+			int[] temp = pool_listar_pool_posicoes_ocupadas();
 			output._1=temp;
 			return output;
 		}
@@ -114,13 +143,13 @@ public class Pool_Pessoa
 	}
 		
 		
-	private int[] pool_listar_posicoes_ocupadas() 
+	private int[] pool_listar_pool_posicoes_ocupadas() 
 	{
-		int[] output = new int[posicoes_ocupadas.size()];
+		int[] output = new int[pool_posicoes_ocupadas.size()];
 		
-		for(int i=0; i!=posicoes_ocupadas.size();i++)
+		for(int i=0; i!=pool_posicoes_ocupadas.size();i++)
 		{
-			output[i]=posicoes_ocupadas.get(i);
+			output[i]=pool_posicoes_ocupadas.get(i);
 		}
 		
 		return output;
