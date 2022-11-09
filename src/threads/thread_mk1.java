@@ -1,5 +1,6 @@
 package threads;
 
-public class thread_mk1 {
+public class thread_mk1 extends Thread
+{
 
 }
