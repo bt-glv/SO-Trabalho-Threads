@@ -78,7 +78,7 @@ public class Pool_mk2
 			}
 			
 		}
-		
+		//	
 		flag_PrimeiraVez_movimentar_p=false;
 	}
 }
