@@ -58,7 +58,25 @@ public class Pool_mk2
 			pool[i].run();
 		}
 	}
-	
+	public Pessoa_Thread pool_removerPessoa(int id_pessoa, int id_porta) 
+	{
+		int pool_indice;
+		Pessoa_Thread pessoa;
+		for(int i=0; i!=pool_posicoes_ocupadas.size();i++) 
+		{
+			pool_indice=pool_posicoes_ocupadas.get(i);
+			if(id_pessoa==pool[pool_indice].getId_pessoa()) 
+			{
+				pessoa=pool[pool_indice];
+				pool[pool_indice]=null;
+				pool_posicoes_ocupadas.remove(Integer.valueOf(pool_indice));
+				
+				return pool[pool_posicoes_ocupadas.get(i)];
+			}
+		}
+		
+		return null;
+	}
 	
 	public void pool_movimentar_pessoas(int tempo_milisegundos) 
 	{if(!flag_PrimeiraVez_movimentar_p) {return;}
