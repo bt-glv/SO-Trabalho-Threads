@@ -32,7 +32,7 @@ public class Pool_mk1
 		
 		pool = new Pessoa[tamanho_pool];
 		
-		for(int i=0; i!=pessoas.length; i++) 
+		for(int i=0; i!=pessoas.length; i++) 	
 		{
 			pool_inserir_pessoa(pessoas[i]);
 		}
@@ -140,5 +140,41 @@ public class Pool_mk1
 		
 		return null;
 	}
+/*	
+	public synchronized Tuple<int[], Pessoa> thread_action(int action, int pool_indice)
+	{
+		Tuple<int[], Pessoa> output = new Tuple<int[], Pessoa> ();
+		
+		if(action==1) 
+		{
+			int[] temp = pool_listar_pool_posicoes_ocupadas();
+			output._1=temp;
+			return output;
+		}
+		if(action==2) 
+		{
+			Pessoa temp = pool_remover_pessoa(pool_indice);
+			output._1=null;output._2=temp;
+			return output;
+		}
+		
+		return null;
+	}
+		
+		
+	private int[] pool_listar_pool_posicoes_ocupadas() 
+	{
+		int[] output = new int[pool_posicoes_ocupadas.size()];
+		
+		for(int i=0; i!=pool_posicoes_ocupadas.size();i++)
+		{
+			output[i]=pool_posicoes_ocupadas.get(i);
+		}
+		
+		return output;
+	}
+		
+		
+*/
 	
 }// END MAIN CLASS STATEMENT
