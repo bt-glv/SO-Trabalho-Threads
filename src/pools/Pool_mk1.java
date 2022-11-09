@@ -111,13 +111,13 @@ public class Pool_mk1
 	public synchronized Pessoa resgatar_pessoa(Algoritmo_De_Decisao a, int id_thread) 
 	{
 		Pessoa output;
-		logger.receber("Thread de id:"+id_thread+" acessou a pool de id: "+id_thread);
+		logger.receber("Thread de id:"+id_thread+" acessou a pool de id: "+id_thread, this.pool);
 
 		int pessoa_selecionada = a.run(pool_posicoes_ocupadas, pool);
 		output =pool_remover_pessoa(pessoa_selecionada);
-		logger.receber("Thread de id:"+id_thread+" selecionou a pessoa de id: "+output.id);
+		logger.receber("Thread de id:"+id_thread+" selecionou a pessoa de id: "+output.id, this.pool);
 
-		logger.receber("Thread de id:"+id_thread+" resgatou a pessoa de id: "+output.id);
+		logger.receber("Thread de id:"+id_thread+" resgatou a pessoa de id: "+output.id, this.pool);
 		return output;
 	}
 	
