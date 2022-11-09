@@ -1,9 +1,8 @@
 package app;
 import java.util.Scanner;
 
-import front_end.Front;
-import models.Pessoa_Thread;
-import pools.Pool_mk2;
+import models.pool.Pool_mk2;
+import models.threads.Pessoa_Thread;
 
 public class Application 
 {

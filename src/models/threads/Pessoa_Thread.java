@@ -1,4 +1,4 @@
-package models;
+package models.threads;
 
 public class Pessoa_Thread extends Thread
 {
