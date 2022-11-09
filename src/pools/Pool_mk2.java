@@ -20,7 +20,7 @@ public class Pool_mk2
 		
 */
 	
-	public Pool_mk2(int tamanho_da_pool, int quantidade_portas, Log logger) 
+	public Pool_mk2(int tamanho_da_pool, int quantidade_portas, Log logger, Pessoa_Thread[] pessoas) 
 	{
 		this.pool=new Pessoa_Thread[tamanho_da_pool];
 		this.logger=logger;
