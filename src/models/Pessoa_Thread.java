@@ -1,5 +1,6 @@
 package models;
 
-public class Pessoa_Thread {
+public class Pessoa_Thread extends Thread
+{
 
 }
