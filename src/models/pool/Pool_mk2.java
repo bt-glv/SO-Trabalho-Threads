@@ -10,14 +10,14 @@ import interfaces.*;
 
 public class Pool_mk2 
 {
-		private ArrayList<Porta> portas = new ArrayList<Porta> ();
+		public ArrayList<Porta> portas = new ArrayList<Porta> ();
 	
-		private Pessoa_Thread[] pool;
-		private ArrayList<Integer> pool_posicoes_ocupadas = new ArrayList<Integer> ();
-		private Log_mk2 logger;
+		public Pessoa_Thread[] pool;
+		public ArrayList<Integer> pool_posicoes_ocupadas = new ArrayList<Integer> ();
+		public Log_mk2 logger;
 
-		private Boolean flag_PrimeiraVez_movimentar_p=true;
-		private Boolean flag_PrimeiraVez_adicionar=true;
+		public Boolean flag_PrimeiraVez_movimentar_p=true;
+		public Boolean flag_PrimeiraVez_adicionar=true;
 
 /*	
 		
@@ -47,24 +47,15 @@ public class Pool_mk2
 	}
 	private void pool_adicionar_pessoa(Pessoa_Thread p) 
 	{
-		if(!flag_PrimeiraVez_adicionar) {return;}
 		int indice = pool_posicoes_ocupadas.size();
 		
 		pool[indice]=p;
 		pool_posicoes_ocupadas.add(Integer.valueOf(indice));
 		
-		flag_PrimeiraVez_adicionar=false;
 	}
 
 
 
-	public void pool_iniciarThreadPessoa() 
-	{
-		for(int i=0; i!=pool.length; i++)
-		{
-			pool[i].run();
-		}
-	}
 	public Pessoa_Thread pool_removerPessoa(int id_pessoa, int id_porta) 
 	{
 		int pool_indice;
@@ -85,6 +76,21 @@ public class Pool_mk2
 		
 		return null;
 	}
+	
+	
+	
+	// public methods
+	public int get_size() {return pool_posicoes_ocupadas.size();}
+
+
+	public void pool_iniciarThreadPessoa() 
+	{
+		for(int i=0; i!=pool.length; i++)
+		{
+			pool[i].run();
+		}
+	}
+	
 	
 	public void pool_movimentar_pessoas(int tempo_milisegundos) 
 	{if(!flag_PrimeiraVez_movimentar_p) {return;}
