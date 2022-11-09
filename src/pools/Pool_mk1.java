@@ -11,7 +11,7 @@ import interfaces.*;
  * Nessa aproximacao, caso seja feito um mecanismo de sinal
  * nos objetos 'pessoas'
  */
-public class Pool_Pessoa 
+public class Pool_mk1 
 {
 	public final int id;
 	private final Log logger;
@@ -25,7 +25,7 @@ public class Pool_Pessoa
 	}
 	
 	
-	public Pool_Pessoa(int id_da_pool, int tamanho_pool, Pessoa[] pessoas, Log logger)
+	public Pool_mk1(int id_da_pool, int tamanho_pool, Pessoa[] pessoas, Log logger)
 	{
 		this.id=id_da_pool;
 		this.logger=logger;
@@ -106,13 +106,12 @@ public class Pool_Pessoa
 
 
 
-//
-// A funcao que os metodos irao usar para interagir com as pools
-//
+//	Usar essa funcao caso a regiao critica seja o array 'pool'
+//	
 	public synchronized Pessoa resgatar_pessoa(Algoritmo_De_Decisao a, int id_thread) 
 	{
 		Pessoa output;
-		logger.receber("Thread de id:"+id_thread+" entrou pela porta de id: "+id_thread);
+		logger.receber("Thread de id:"+id_thread+" acessou a pool de id: "+id_thread);
 
 		int pessoa_selecionada = a.run(pool_posicoes_ocupadas, pool);
 		output =pool_remover_pessoa(pessoa_selecionada);
@@ -120,6 +119,26 @@ public class Pool_Pessoa
 
 		logger.receber("Thread de id:"+id_thread+" resgatou a pessoa de id: "+output.id);
 		return output;
+	}
+	
+//	Usar essa funcao caso a regiao critica seja os objetos da classe pessoa
+//	
+	public Pessoa resgatar_pessoa(int id_thread) {
+		
+		Pessoa dummy;
+		for(int i=0; i!=pool_posicoes_ocupadas.size(); i++) {
+			
+			dummy=pool[pool_posicoes_ocupadas.get(i)];
+			if(dummy.emUsoPor()==0) {
+				
+				if(dummy.requisitar_uso(id_thread)) {
+					return pool_remover_pessoa(pool_posicoes_ocupadas.get(i));
+				}
+				
+			}
+		}
+		
+		return null;
 	}
 /*	
 	public synchronized Tuple<int[], Pessoa> thread_action(int action, int pool_indice)
