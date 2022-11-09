@@ -12,7 +12,7 @@ public class Pool_mk2
 	
 		private Pessoa_Thread[] pool;
 		private ArrayList<Integer> pool_posicoes_ocupadas = new ArrayList<Integer> ();
-		private Log logger;
+		private Log_mk1 logger;
 
 		private Boolean flag_PrimeiraVez_movimentar_p=true;
 		private Boolean flag_PrimeiraVez_adicionar=true;
@@ -21,7 +21,7 @@ public class Pool_mk2
 		
 */
 	
-	public Pool_mk2(int tamanho_da_pool, int quantidade_portas, Log logger, Pessoa_Thread[] pessoas) 
+	public Pool_mk2(int tamanho_da_pool, int quantidade_portas, Log_mk1 logger, Pessoa_Thread[] pessoas) 
 	{
 		if(pessoas==null)		{throw new java.lang.Error("Pool =>\nO valor do parametro Pessoa_Thread e nulo");}
 		if(pessoas.length==0)	{throw new java.lang.Error("Pool =>\nNao existem pessoas para adicionar a thread");}
@@ -36,7 +36,7 @@ public class Pool_mk2
 			pool_adicionar_pessoa(pessoas[i]);
 		}
 		
-		logger.receber("A pool foi instancializada", null);
+		logger.receber("A pool foi instancializad", null);
 	}
 	private void pool_adicionar_pessoa(Pessoa_Thread p) 
 	{
@@ -71,6 +71,7 @@ public class Pool_mk2
 				pool[pool_indice]=null;
 				pool_posicoes_ocupadas.remove(Integer.valueOf(pool_indice));
 				
+				logger.receber("Pessoa de id: "+id_pessoa+" saiu da pool e agora se encontra na porta de id: "+id_porta, this.pool);
 				return pool[pool_posicoes_ocupadas.get(i)];
 			}
 		}
