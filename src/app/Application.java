@@ -2,7 +2,6 @@ package app;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import models.test;
 import models.pool.Pool;
 
 
