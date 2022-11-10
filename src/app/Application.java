@@ -1,4 +1,5 @@
 package app;
+import java.util.ArrayList;
 import java.util.Scanner;
 import models.pool.Pool;
 
@@ -6,7 +7,7 @@ import models.pool.Pool;
 public class Application 
 {
 	
-	private static Front front;
+	private static Front front = new Front();
 	
 	public static void main(String[] args) 
 	{
@@ -24,6 +25,13 @@ public class Application
 		new Pool(portas,pessoas,largura,autura,front);
 		
 		
+		int[][] matriz = new int[autura][largura];
+		ArrayList<int[]> lista = new ArrayList<int[]> ();
+		lista.add(new int[] {0,0});
+		
+		
+	
+		front.receber(matriz, lista);
 		
 		
 	}
