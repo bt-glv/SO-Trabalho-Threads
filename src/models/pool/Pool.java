@@ -40,8 +40,9 @@ public class Pool
 	public synchronized Boolean acesso(Th_Action action, int th_id) 
 	{
 		int[] POS = getPOS(th_id);
+		if(POS==null) {return false;}
 		
-		this.array_pool=action.run(array_pool, POS);
+		this.array_pool=action.run(array_pool, POS, this.Portas);
 		logger.receber(array_pool, Portas);
 		
 		return check_ifReachedDoor(th_id, POS);

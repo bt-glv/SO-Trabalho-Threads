@@ -12,38 +12,74 @@ public class Th_Pessoa extends Thread
 
 	private Pool pool;
 	private int[][]doors;
-	private int[]door_path_lengths;
 	
-	private Th_Action th_action;
+	protected ArrayList<int[]> portas = new ArrayList<int[]> ();
+	private int[]door_path_lengths;
+
+	
+	// Construtor
 	
 	public Th_Pessoa(int Th_Aluno_ID, Pool pool) 
 	{
 		this.Th_Aluno_ID=Th_Aluno_ID;
 		this.pool=pool;
 	}
+
 	
-/*	
-	private class exec implements Th_Action
+	// Metodo a ser executado em Pool
+	
+	public class movimentacao_aleatoria implements Th_Action
 	{
 
+		private Th_Pessoa pai;
+
 		@Override
-		public int[][] run(int[][] pool) {
+		public int[][] run(int[][] pool, int[] Current_POS, ArrayList<int[]> portas) {
 			// TODO Auto-generated method stub
 			return null;
 		}
+
 		
 		
 	}
-*/	
 	
-	private int[][] mover_para_porta(int[][] pool, int[] selected_door, int[] current_pos) 
+	public class movimentacao_para_a_porta implements Th_Action
 	{
+
+		private Th_Pessoa pai;
+
+		@Override
+		public int[][] run(int[][] pool, int[] Current_POS, ArrayList<int[]> portas) {
+			// TODO Auto-generated method stub
+			pai.portas=portas;
+			return null;
+		}
+
+
+	}
+	
+	
+	private int selecionar_porta() 
+	{
+		int lower=999999999;
+		int selected_index=0;
 		
+		for(int i=0; i!=door_path_lengths.length; i++) 
+		{
+			if(door_path_lengths[i]<lower) {lower=door_path_lengths[i]; selected_index=i;}
+		}
 		
-		
-		
-			int p_vertical=selected_door[0];
-			int p_horizontal=selected_door[1];
+		return selected_index;
+	}
+	
+	
+	private int[][] mover_para_porta(int[][] pool, int[] current_pos) 
+	{
+	
+			int porta_selecionada = selecionar_porta();
+			
+			int p_horizontal =portas.get(porta_selecionada)[0];
+			int p_vertical   =portas.get(porta_selecionada)[1];
 			
 			Boolean status=false;
 			int temp;
@@ -55,7 +91,9 @@ public class Th_Pessoa extends Thread
 				else {}
 				return pool;
 			}
-			if(p_vertical<current_pos[0]) {return null;}
+			
+			if(p_vertical<current_pos[0]) 
+			{return null;}
 			// if(p_vertical==current_pos[0]){}
 			
 			
