@@ -12,14 +12,14 @@ public class Pool
 	//	Variaveis	
 	//
 	private Pool self;
-	public void setSelf(Pool self) {this.self = self;}
 	
 	private ArrayList<int[]> Portas = new ArrayList<int[]> ();
 
 	private int[][] array_pool;
-	private ArrayList<Th_Pessoa> Pessoas  = new ArrayList<Th_Pessoa> ();
 	private Log logger;
 	
+	private ArrayList<Th_Pessoa> Pessoas  = new ArrayList<Th_Pessoa> ();
+	private int qtd_pessoas;
 	//
 	//	Construtor 
 	//
@@ -28,7 +28,8 @@ public class Pool
 		array_pool = new int[tamanho_horizontal][tamanho_vertical];
 		this.logger=logger;
 		generateDoors(qtd_portas);
-		generatePessoas(qtd_pessoas);
+		this.qtd_pessoas=qtd_pessoas;
+		// generatePessoas(qtd_pessoas);
 	}
 	
 	
@@ -79,12 +80,58 @@ public class Pool
 			}
 		}
 	}
-	private void generatePessoas(int qtd_pessoas) 
+	
+	
+	
+	
+	
+	//
+	// Metodos usados para finalizar a criacao da pool
+	//
+	
+	private void pool_place_pessoas() 
 	{
-		for(int i=0; i!=qtd_pessoas;i++) 
+		// ArrayList<int[]> nao_ocupados = new ArrayList<int[]> ();
+		//
+		// Essa funcao seria melhor implementada com uma lista de posicoes nao ocupadas
+		
+		
+		int horizontal=0;
+		int vertical=0;
+		
+		int horizontal_max=array_pool.length;
+		int vertical_max=array_pool[0].length;
+		
+		for(int i=0; i!=this.qtd_pessoas; i++) 
+		{
+			horizontal++;
+			if(horizontal==horizontal_max) {horizontal=0; ++vertical;}
+			
+			array_pool[horizontal][vertical]=Pessoas.get(i).Th_Aluno_ID;
+			
+			if(vertical==vertical_max) {break;}
+		}
+	}
+			
+	private void generatePessoas() 
+	{
+		for(int i=0; i!=this.qtd_pessoas;i++) 
 		{
 			Pessoas.add(new Th_Pessoa(i,this.self));
 		}
+		
+		pool_place_pessoas();
+	}
+	
+	private void setSelf(Pool self)
+	{
+		this.self = self;
+	}
+	
+	public void finish_setup(Pool self) 
+	{
+		setSelf(self);
+		generatePessoas();
 	}
 	
 	

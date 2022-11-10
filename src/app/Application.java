@@ -32,8 +32,8 @@ public class Application
 		System.out.println("\n\n");
 
 	 
-		new Pool(portas,pessoas,largura,altura,front);
-		
+		Pool main_pool = new Pool(portas,pessoas,largura,altura,front);
+		main_pool.finish_setup(main_pool);
 		
 		int[][] matriz = new int[altura][largura];
 		ArrayList<int[]> lista = new ArrayList<int[]> ();
