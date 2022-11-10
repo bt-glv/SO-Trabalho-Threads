@@ -1,10 +1,13 @@
 package app;
 import java.util.Scanner;
+import models.pool.Pool;
 
 
 public class Application 
 {
-
+	
+	private Front front;
+	
 	public static void main(String[] args) 
 	{
 		int autura, largura, portas , pessoas;
@@ -17,7 +20,8 @@ public class Application
 		portas = ip.nextInt();
 		System.out.println("incira a pessoas");
 		pessoas = ip.nextInt();
-	
+	 
+		new Pool(portas,pessoas,largura,autura);
 		
 		
 	}
