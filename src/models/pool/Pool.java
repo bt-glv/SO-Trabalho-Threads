@@ -4,11 +4,13 @@ import interfaces.*;
 
 public class Pool {
 
-	ArrayList<Integer> Portas = new ArrayList<Integer> ();
+	ArrayList<int[]> Portas = new ArrayList<int[]> ();
 	int[][] Pool;
 	
 	public Pool(int qtd_portas, int qtd_pessoas, int tamanho_horizontal, int tamanho_vertical, Log logger) 
-	{}
+	{
+		
+	}
 	
 	
 	public synchronized void acesso() 
