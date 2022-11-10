@@ -6,7 +6,7 @@ import models.pool.Pool;
 public class Application 
 {
 	
-	private Front front;
+	private static Front front;
 	
 	public static void main(String[] args) 
 	{
@@ -21,7 +21,9 @@ public class Application
 		System.out.println("incira a pessoas");
 		pessoas = ip.nextInt();
 	 
-		new Pool(portas,pessoas,largura,autura);
+		new Pool(portas,pessoas,largura,autura,front);
+		
+		
 		
 		
 	}
