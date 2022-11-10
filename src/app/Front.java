@@ -22,12 +22,24 @@ public class Front implements Log
 			 {
 				 
 	            	pool[linha][coluna] = 0;
-	            	int[] porta_atual = portas.get(0);
+	            	int[] porta_atual = null;
 	            	
 	            	
-	            	if (linha == porta_atual[0] && coluna == porta_atual[1]) 
+	            	for(int i=0; i!=portas.size(); i++)
+	            	{
+	            		if(portas.get(i)[0]==linha && portas.get(i)[1]==coluna) 
+	            		{
+	            			porta_atual=portas.get(i);
+	            			break;
+	            		}
+	            	}
+	            	
+	            	
+
+	            	if (porta_atual!=null && linha == porta_atual[0] && coluna == porta_atual[1]) 
 	            	{
 	            		temp="B";
+	            		
 	            	}
 	            	else if(pool[linha][coluna]==0)	
 		            {
