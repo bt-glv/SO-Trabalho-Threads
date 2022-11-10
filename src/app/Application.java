@@ -27,7 +27,9 @@ public class Application
 		
 		int[][] matriz = new int[autura][largura];
 		ArrayList<int[]> lista = new ArrayList<int[]> ();
-		lista.add(new int[] {0,0});
+		lista.add(new int[] {5,7});
+		lista.add(new int[] {2,5});
+		lista.add(new int[] {7,2});
 		
 		
 	
