@@ -13,21 +13,29 @@ public class Application
 	
 	public static void main(String[] args) 
 	{
-		int autura, largura, portas , pessoas;
+		int altura, largura, portas , pessoas;
 		Scanner ip = new Scanner(System.in);
-		System.out.println("incira a largura");
+		System.out.println("Insira a largura:");
 		largura = ip.nextInt();
-		System.out.println("incira a autura");
-		autura = ip.nextInt();
-		System.out.println("incira a portas");
+		System.out.println("\n\n");
+
+		System.out.println("Insira a altura:");
+		altura = ip.nextInt();
+		System.out.println("\n\n");
+
+		System.out.println("Insira a quantidade de portas:");
 		portas = ip.nextInt();
-		System.out.println("incira a pessoas");
+		System.out.println("\n\n");
+
+		System.out.println("Insira a quantidade de pessoas:");
 		pessoas = ip.nextInt();
+		System.out.println("\n\n");
+
 	 
-		new Pool(portas,pessoas,largura,autura,front);
+		new Pool(portas,pessoas,largura,altura,front);
 		
 		
-		int[][] matriz = new int[autura][largura];
+		int[][] matriz = new int[altura][largura];
 		ArrayList<int[]> lista = new ArrayList<int[]> ();
 		lista.add(new int[] {5,7});
 		lista.add(new int[] {2,5});

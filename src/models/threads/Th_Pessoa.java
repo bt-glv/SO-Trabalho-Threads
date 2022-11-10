@@ -22,7 +22,7 @@ public class Th_Pessoa extends Thread
 		this.pool=pool;
 	}
 	
-	
+/*	
 	private class exec implements Th_Action
 	{
 
@@ -34,7 +34,7 @@ public class Th_Pessoa extends Thread
 		
 		
 	}
-	
+*/	
 	
 	private int[][] mover_para_porta(int[][] pool, int[] selected_door, int[] current_pos) 
 	{

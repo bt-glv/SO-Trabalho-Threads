@@ -8,6 +8,9 @@ import interfaces.*;
 
 public class Pool 
 {
+	//
+	//	Variaveis	
+	//
 	private Pool self;
 	public void setSelf(Pool self) {this.self = self;}
 	
@@ -17,7 +20,9 @@ public class Pool
 	private ArrayList<Th_Pessoa> Pessoas  = new ArrayList<Th_Pessoa> ();
 	private Log logger;
 	
-	
+	//
+	//	Construtor 
+	//
 	public Pool(int qtd_portas, int qtd_pessoas, int tamanho_horizontal, int tamanho_vertical, Log logger) 
 	{
 		array_pool = new int[tamanho_horizontal][tamanho_vertical];
@@ -41,10 +46,11 @@ public class Pool
 		return check_ifReachedDoor(th_id, POS);
 	}
 
+
+
 	//
 	// Metodos usados no costrutor
 	//
-
 	private void generateDoors(int qtd_portas) 
 	{
 		Random r = new Random();
@@ -52,12 +58,27 @@ public class Pool
 		int random_horizontal;
 		int random_vertical;
 		
+		Boolean repeated;
+		
 		for(int i=0;i!=qtd_portas;i++) 
 		{
+			// Essa implementacao pode cusar um loop infinito se muitos portas forem geradas
+			//
+			// O correto seria manter um indice de quais indices na oestao ocupados por uma porta
+			// e entao escolher um numero entre elas.
 			
+			while(true) 
+			{
+			random_horizontal= r.nextInt(array_pool.length);
+			random_vertical= r.nextInt(array_pool[0].length);
+			
+			repeated=this.Portas.add(new int[] {random_vertical, random_vertical});
+			
+			if(!repeated) {this.Portas.remove(i);} else {break;}
+			
+			}
 		}
 	}
-	
 	private void generatePessoas(int qtd_pessoas) 
 	{
 		for(int i=0; i!=qtd_pessoas;i++) 
@@ -65,6 +86,9 @@ public class Pool
 			Pessoas.add(new Th_Pessoa(i,this.self));
 		}
 	}
+	
+	
+	
 	
 	//
 	//	Metodos usados por 'acesso' (regiao critica)
