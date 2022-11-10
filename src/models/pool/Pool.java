@@ -140,7 +140,20 @@ public class Pool
 	//
 	//	Metodos usados por 'acesso' (regiao critica)
 	//
-	private int[] getPOS(int Th_Aluno_id) {return null;}
+	private int[] getPOS(int Th_Aluno_id) 
+	{
+		for(int i_horizontal=0; i_horizontal!=array_pool.length; i_horizontal++)
+		{
+			for(int i_vertical=0; i_vertical!=array_pool[0].length; i_vertical++) 
+			{
+				if(array_pool[i_horizontal][i_vertical]==Th_Aluno_id) {return new int[] {i_horizontal, i_vertical};}
+			}
+		}
+		
+		return null;
+	}
+	
+	
 	private Boolean check_ifReachedDoor(int Th_Aluno_id, int[] current_pos) 
 	{
 		for(int linha=0 ; linha < Portas.size(); linha++)
