@@ -17,9 +17,9 @@ public class Pool {
 	}
 	
 	
-	public synchronized Boolean acesso(Th_Action action) 
+	public synchronized Boolean acesso(Th_Action action, int th_id) 
 	{
-		this.Pool=action.run(Pool);
+		this.Pool=action.run(Pool, getPOS(th_id));
 		logger.receber(Pool, Portas);
 		return false;
 	}
@@ -33,7 +33,7 @@ public class Pool {
 	}
 	
 	private int[][] getPool(){return Pool;}
-	private int[][] getPOS(int Th_Aluno_id) {return null;}
+	private int[] getPOS(int Th_Aluno_id) {return null;}
 	private Boolean check_ifReachedDoor(int Th_Aluno_id, int[] current_pos) 
 	{
 		for(int linha=0 ; linha < Portas.size(); linha++)
