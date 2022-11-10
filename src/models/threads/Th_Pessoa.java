@@ -9,6 +9,7 @@ import models.pool.Pool;
 public class Th_Pessoa extends Thread
 {
 	public final int Th_Aluno_ID;
+	private Th_Pessoa self;
 
 	private Pool pool;
 	private int[][]doors;
@@ -33,6 +34,15 @@ public class Th_Pessoa extends Thread
 
 		private Th_Pessoa pai;
 
+		
+		
+		public movimentacao_aleatoria(Th_Pessoa pai) {
+			super();
+			this.pai = pai;
+		}
+
+
+
 		@Override
 		public int[][] run(int[][] pool, int[] Current_POS, ArrayList<int[]> portas) {
 			// TODO Auto-generated method stub
@@ -47,6 +57,15 @@ public class Th_Pessoa extends Thread
 	{
 
 		private Th_Pessoa pai;
+
+		
+		
+		public movimentacao_para_a_porta(Th_Pessoa pai) {
+			super();
+			this.pai = pai;
+		}
+
+
 
 		@Override
 		public int[][] run(int[][] pool, int[] Current_POS, ArrayList<int[]> portas) {
@@ -183,6 +202,18 @@ public class Th_Pessoa extends Thread
 	
 	public void run() 
 	{
+		long startTime = System.currentTimeMillis(); //fetch starting time
+		while(false||(System.currentTimeMillis()-startTime)<10000)
+		{
+			pool.acesso(new movimentacao_aleatoria(this.self), Th_Aluno_ID);
+		}
+		
+		Boolean loop=true;
+		
+		while(loop) 
+		{
+			pool.acesso(new movimentacao_para_a_porta(this.self), Th_Aluno_ID);
+		}
 		
 	}
 	
