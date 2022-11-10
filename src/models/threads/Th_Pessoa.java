@@ -2,23 +2,25 @@ package models.threads;
 import java.util.ArrayList;
 
 import interfaces.Th_Action;
+import models.pool.Pool;
 
 
 
-public class Th_Aluno extends Thread
+public class Th_Pessoa extends Thread
 {
 	public final int Th_Aluno_ID;
-	
+
+	private Pool pool;
 	private int[][]doors;
 	private int[]door_path_lengths;
 	
 	private Th_Action th_action;
 	
-	public Th_Aluno(int Th_Aluno_ID) {this.Th_Aluno_ID=Th_Aluno_ID;}
-	
-	
-	
-	
+	public Th_Pessoa(int Th_Aluno_ID, Pool pool) 
+	{
+		this.Th_Aluno_ID=Th_Aluno_ID;
+		this.pool=pool;
+	}
 	
 	
 	private class exec implements Th_Action

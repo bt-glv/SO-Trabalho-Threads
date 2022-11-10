@@ -1,6 +1,8 @@
 package app;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import models.test;
 import models.pool.Pool;
 
 
@@ -34,8 +36,15 @@ public class Application
 		
 	
 		front.receber(matriz, lista);
+	/*	
+		test t = new test(t);
+		t.id=10;
+		
+		test out = t.getSelf();
 		
 		
+		System.out.println(out.id);
+		
+	 */
 	}
-
 }
