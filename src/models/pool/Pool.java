@@ -1,8 +1,13 @@
 package models.pool;
+import java.util.ArrayList;
+import interfaces.*;
 
 public class Pool {
 
-	public Pool(int qtd_portas, int qtd_pessoas, int tamanho_horizontal, int tamanho_vertical) 
+	ArrayList<Integer> Portas = new ArrayList<Integer> ();
+	int[][] Pool;
+	
+	public Pool(int qtd_portas, int qtd_pessoas, int tamanho_horizontal, int tamanho_vertical, Log logger) 
 	{}
 	
 	
@@ -15,6 +20,7 @@ public class Pool {
 	
 	private int[][] getPool(){return null;}
 	private int[][] getPOS(int Th_Aluno_id) {return null;}
+	private Boolean check_ifReachedDoor(int Th_Aluno_id) {return false;}
 	
 	
 	
