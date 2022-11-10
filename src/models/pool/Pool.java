@@ -13,9 +13,9 @@ public class Pool
 	//
 	private Pool self;
 	
-	private ArrayList<int[]> Portas = new ArrayList<int[]> ();
+	public ArrayList<int[]> Portas = new ArrayList<int[]> ();
+	public int[][] array_pool;
 
-	private int[][] array_pool;
 	private Log logger;
 	
 	private ArrayList<Th_Pessoa> Pessoas  = new ArrayList<Th_Pessoa> ();

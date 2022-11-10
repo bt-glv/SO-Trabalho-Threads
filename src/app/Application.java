@@ -33,6 +33,7 @@ public class Application
 	 
 		Pool main_pool = new Pool(portas,pessoas,largura,altura,front);
 		main_pool.finish_setup(main_pool);
+		front.receber(main_pool.array_pool, main_pool.Portas);
 		
 		int[][] matriz = new int[altura][largura];
 		ArrayList<int[]> lista = new ArrayList<int[]> ();

@@ -60,7 +60,7 @@ public class Front implements Log
 	            
 	        }
 		
-	
+		 	System.out.println("\n\n");
 	}
 	
 

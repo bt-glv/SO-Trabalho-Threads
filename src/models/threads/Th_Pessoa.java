@@ -75,25 +75,34 @@ public class Th_Pessoa extends Thread
 	
 	private int[][] mover_para_porta(int[][] pool, int[] current_pos) 
 	{
-	
 			int porta_selecionada = selecionar_porta();
 			
 			int p_horizontal =portas.get(porta_selecionada)[0];
 			int p_vertical   =portas.get(porta_selecionada)[1];
 			
 			Boolean status=false;
-			int temp;
+			int posicao_alvo;
 			
-			if(p_vertical>current_pos[0]) 
+			
+			
+			
+			if(p_horizontal>current_pos[0]) 
 			{
-				temp=current_pos[0]-p_vertical;
-				if(pool[temp][current_pos[1]]==0) {pool[temp][current_pos[1]]  =   pool[current_pos[0]][current_pos[1]];}
-				else {}
+				posicao_alvo=current_pos[0]-p_horizontal;
+				if(pool[posicao_alvo][current_pos[1]]==0) 
+				{
+					pool[posicao_alvo][current_pos[1]]  =   pool[current_pos[0]][current_pos[1]];
+				}
+				else 
+				{
+					
+				}
 				return pool;
 			}
-			
-			if(p_vertical<current_pos[0]) 
-			{return null;}
+			if(p_horizontal<current_pos[0]) 
+			{
+				return null;
+			}
 			// if(p_vertical==current_pos[0]){}
 			
 			
